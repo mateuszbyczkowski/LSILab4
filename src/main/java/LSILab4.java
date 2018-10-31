@@ -8,33 +8,24 @@ public class LSILab4 {
     private Matrix matrix;
     private Matrix queryVector;
 
+    private LSILab4() {
+        this.matrix = MatrixUtils.readMatrix("data.txt");
+        this.queryVector = MatrixUtils.readMatrix("query.txt");
+    }
+
     public static void main(String[] args) {
         new LSILab4().run();
     }
 
     private void run() {
-        // init the matrix and the query
-        matrix = MatrixUtils.readMatrix("data.txt");
-        queryVector = MatrixUtils.readMatrix("query.txt");
-
         if (matrix != null && queryVector != null) {
-            System.out.println("Matrix:");
-            matrix.print(3, 2);
+            printMatrixAndVector();
 
-            // print the dimensions of the matrix
-            System.out.println("matrix: " + MatrixUtils.dim(matrix));
+            List<Double> similarity4 = decomposeAndCountSimilarities(4);
+            printSimilarity(similarity4, 4);
 
-            System.out.println("Query:");
-            queryVector.print(3, 2);
-            System.out.println("Q: " + MatrixUtils.dim(queryVector));
-
-            int sCount = 4;
-            List<Double> similarity4 = decomposeAndCountSimilarities(sCount);
-            printSimilarity(similarity4, sCount);
-
-            sCount = 2;
-            List<Double> similarity2 = decomposeAndCountSimilarities(sCount);
-            printSimilarity(similarity2, sCount);
+            List<Double> similarity2 = decomposeAndCountSimilarities(2);
+            printSimilarity(similarity2, 2);
         } else {
             System.out.println("Błąd odczytu z pliku ");
         }
@@ -81,10 +72,22 @@ public class LSILab4 {
         return similarityList;
     }
 
-    private void printSimilarity(List<Double> similarity, int ownValue) {
-        System.out.println("\nDla najwiekszej wartosci wlasnej macierzy S rownej " + ownValue + " podobienstwo wynosi: ");
+    private void printSimilarity(List<Double> similarity, int sCount) {
+        System.out.println("\nDla najwiekszej wartosci wlasnej macierzy S rownej " + sCount + " podobienstwo wynosi: ");
         for (int i = 0; i < similarity.size() - 1; i++) {
             System.out.println("Document: " + i + " - Similarity: " + similarity.get(i));
         }
+    }
+
+    private void printMatrixAndVector() {
+        System.out.println("Matrix:");
+        matrix.print(3, 2);
+
+        // print the dimensions of the matrix
+        System.out.println("matrix: " + MatrixUtils.dim(matrix));
+
+        System.out.println("Query:");
+        queryVector.print(3, 2);
+        System.out.println("Q: " + MatrixUtils.dim(queryVector));
     }
 }

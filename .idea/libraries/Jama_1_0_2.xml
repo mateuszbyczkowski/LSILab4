@@ -4,9 +4,6 @@
       <root url="jar://$PROJECT_DIR$/Jama-1.0.2.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ideaLibSources/Jama-1.0.2-sources.jar!/" />
-      <root url="jar://$PROJECT_DIR$/Jama-1.0.2.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

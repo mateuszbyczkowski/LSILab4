@@ -53,16 +53,16 @@ public class LSILab4 {
         Matrix qPrim = queryVector.transpose().times(croppedK).times(croppedS.inverse());
 
         // count ABS of Q prim vector
-        double qABS = MatrixUtils.geMatrixtABS(qPrim, qPrim.getColumnDimension());
+        double qABS = MatrixUtils.geMatrixABSbyColumn(qPrim, qPrim.getColumnDimension());
 
-        for (int i = 0; i < croppedD.getColumnDimension() - 1; i++) {
+        for (int i = 0; i < croppedD.getColumnDimension(); i++) {
             // count ABS of document vector
-            double dABS = MatrixUtils.geMatrixtABS(croppedD, croppedD.getRowDimension());
-
             Matrix document = croppedD.getMatrix(0, croppedD.getRowDimension() - 1, i, i);
 
+            double dABS = MatrixUtils.geMatrixABSbyRow(document, document.getRowDimension());
+
             double documentTimesQprim = 0d;
-            for (int n = 0; n < document.getRowDimension() - 1; n++) {
+            for (int n = 0; n < document.getRowDimension(); n++) {
                 documentTimesQprim = documentTimesQprim + document.get(n, 0) * qPrim.get(0, n);
             }
 
@@ -74,7 +74,7 @@ public class LSILab4 {
 
     private void printSimilarity(List<Double> similarity, int sCount) {
         System.out.println("\nDla najwiekszej wartosci wlasnej macierzy S rownej " + sCount + " podobienstwo wynosi: ");
-        for (int i = 0; i < similarity.size() - 1; i++) {
+        for (int i = 0; i < similarity.size(); i++) {
             System.out.println("Document: " + i + " - Similarity: " + similarity.get(i));
         }
     }

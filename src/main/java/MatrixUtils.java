@@ -8,13 +8,22 @@ import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class MatrixUtils {
-    public static double geMatrixtABS(Matrix qPrim, int columnDimension) {
+    public static double geMatrixABSbyColumn(Matrix qPrim, int columnDimension) {
         double qABS = 0d;
-        for (int j = 0; j < columnDimension - 1; j++) {
+        for (int j = 0; j < columnDimension; j++) {
             qABS = qABS + Math.pow(qPrim.get(0, j), 2);
         }
         qABS = Math.sqrt(qABS);
         return qABS;
+    }
+
+    public static double geMatrixABSbyRow(Matrix qPrim, int rowDimension) {
+        double dABS = 0d;
+        for (int j = 0; j < rowDimension; j++) {
+            dABS = dABS + Math.pow(qPrim.get(j, 0), 2);
+        }
+        dABS = Math.sqrt(dABS);
+        return dABS;
     }
 
     public static String dim(Matrix matrix) {
